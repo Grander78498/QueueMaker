@@ -46,5 +46,5 @@
 }
 
 .navbar-buttons button:active {
-  background-color: #3615a5;
+  box-shadow: 3px 3px #6c6878;
 }
