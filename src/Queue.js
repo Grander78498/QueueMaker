@@ -1,9 +1,9 @@
 const Queue = ({ name, members }) => {
     return (
-        <div>
-            <p>Название очереди: {name}</p>
+        <div className="queue">
+            <p>{name}</p>
             <ul>
-                {members.map(member => <li>{member}</li>)}
+                {members.map(member => <li key={member.id}>{member.name}</li>)}
             </ul>
         </div>
     )

@@ -2,16 +2,18 @@ import Queue from "./Queue";
 
 const QueueList = () => {
     const queueList = [
-        {name: "Говно", members: ["Я", "Ещё раз я"]},
-        {name: "Моча", members: ['Лёня', 'Егор']}
+        {id: 1, name: "Говно", members: [
+            {name: "Я", id: 1}, {name: "Ещё раз я", id: 2}]},
+        {id: 2, name: "Моча", members: [
+            {name: "Лёня", id: 1}, {name: "Егор", id: 2}]}
     ]
     const queueElements = queueList.map(queue => {
-        return <Queue name={queue.name} members={queue.members}/>
+        return <Queue key={queue.id} name={queue.name} members={queue.members}/>
     })
     return (
-        <div>
+        <div className="main-content">
             <p>Ваши очереди:</p>
-            {queueElements}
+            <div className="">{queueElements}</div>
         </div>
     )
 }
