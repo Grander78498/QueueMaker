@@ -1,19 +1,37 @@
 import Queue from "./Queue";
+import { useState, useEffect } from 'react';
 
 const QueueList = () => {
-    const queueList = [
-        {id: 1, name: "Говно", members: [
-            {name: "Я", id: 1}, {name: "Ещё раз я", id: 2}]},
-        {id: 2, name: "Моча", members: [
-            {name: "Лёня", id: 1}, {name: "Егор", id: 2}]}
-    ]
-    const queueElements = queueList.map(queue => {
-        return <Queue key={queue.id} name={queue.name} members={queue.members}/>
-    })
+    let [queueList, setQueueList] = useState(null);
+    let [isFetching, setIsFetching] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => fetch("http://localhost:8000/queue")
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error("Error in connecting to db");
+                }
+                return res.json();
+            })
+            .then(data => {
+                setQueueList(data);
+                setIsFetching(false);
+            })
+            .catch(err => {
+                console.log(err.message);
+            }), 1000);
+    }, []);
+
     return (
         <div className="main-content">
             <p>Ваши очереди:</p>
-            <div className="">{queueElements}</div>
+            {!isFetching && queueList && <div className="">{
+                queueList.map(queue => {
+                    return <Queue key={queue.id} name={queue.name} members={queue.members}/>
+                })
+            }</div>}
+            {!isFetching && !queueList && <p>Пока что у вас нет очередей ((</p>}
+            {isFetching && <p>Загрузка очередей</p>}
         </div>
     )
 }
