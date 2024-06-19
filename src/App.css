@@ -1,40 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
+:root {
+  --cl-blue: #3615a5;
+  --margin: clamp(0px, 5%, 100px);
+}
+
 .App {
+  position: relative;
   font-family: "Ubuntu", sans-serif;
   font-weight: 400;
   font-style: normal;
-  margin: 5px 100px;
+  margin: 5px var(--margin);
 }
 
 .navbar {
-  color: #3615a5;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .navbar h2 {
-  font-size: 60px;
-  margin-top: auto;
-  margin-bottom: auto;
+  color: var(--cl-blue);
+  font-size: 50px;
+  margin: 0;
+  flex: 1;
 }
 
 .navbar-buttons {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  justify-content: space-evenly;
 }
 
 .navbar-buttons button {
   background-color: inherit;
   border: none;
   border-radius: 50%;
-  margin: 0 10px;
-}
-
-.navbar-buttons button:last-child {
-  margin-right: 0;
+  transition: transform 1s;
 }
 
 .navbar-buttons img {
@@ -46,5 +48,126 @@
 }
 
 .navbar-buttons button:active {
-  box-shadow: 3px 3px #6c6878;
+  animation: rotateButton 1s forwards;
+}
+
+.loading {
+  background: #201f22;
+  width: 200px;
+  height: 10px;
+  border-radius: 5px;
+
+  animation: loading 1s ease-out 0s infinite;
+}
+
+@keyframes loading {
+  0%,
+  100% {
+    background-color: #201f22;
+  }
+
+  50% {
+    background-color: #4d4a50;
+  }
+}
+
+@keyframes blurring {
+  from {
+    filter: none;
+  }
+
+  to {
+    filter: blur(3px);
+  }
+}
+
+@keyframes unblurring {
+  to {
+    filter: none;
+  }
+
+  from {
+    filter: blur(3px);
+  }
+}
+
+@keyframes rotateButton {
+  from {
+    transform: none;
+  }
+
+  to {
+    transform: rotateX(90deg);
+  }
+}
+
+.blurred {
+  animation: blurring 0.3s forwards;
+}
+
+.unblurred {
+  animation: unblurring 0.3s forwards;
+}
+
+.queue-list {
+  display: flex;
+}
+
+.queue {
+  background: #3615a5;
+  color: white;
+  border-radius: 20px;
+  height: 150px;
+  width: clamp(100px, 50%, 150px);
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  filter: drop-shadow(10px 10px 10px black);
+}
+
+.queue ol {
+  padding-left: 0;
+  list-style-position: inside;
+}
+
+.queue p {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+li.normal-item {
+  font-weight: 500;
+  color: white;
+}
+
+li.dotted-item {
+  list-style: none;
+}
+
+.queue-adder {
+  position: absolute;
+  left: calc(50% - var(--margin));
+  background: #dfdce1;
+  padding: 3px 3px;
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.queue-adder p {
+  margin: 5px 5px;
+}
+
+.queue-adder button {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  top: -15px;
+  right: -15px;
+}
+
+.queue-adder img {
+  height: 20px;
+  border-radius: 50%;
 }
