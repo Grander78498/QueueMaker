@@ -6,7 +6,7 @@ const QueueAdder = ({closeClick}) => {
     return (
         <div className="queue-adder">
             <p>Добавление очереди</p>
-            <button onClick={() => closeClick(false)}>
+            <button onClick={() => closeClick(2)}>
                 <img src={closeButton} alt="Close button"/>
             </button>
         </div>

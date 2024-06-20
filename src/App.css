@@ -48,7 +48,7 @@
 }
 
 .navbar-buttons button:active {
-  animation: rotateButton 1s forwards;
+  transform: translateY(-10px);
 }
 
 .loading {
@@ -93,11 +93,11 @@
 
 @keyframes rotateButton {
   from {
-    transform: none;
+    transform: rotate(0deg);
   }
 
   to {
-    transform: rotateX(90deg);
+    transform: rotate(90deg);
   }
 }
 

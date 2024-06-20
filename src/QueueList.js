@@ -1,12 +1,14 @@
 import Queue from "./Queue";
 import useFetch from "./useFetch";
 
-const QueueList = () => {
+const QueueList = ({showQueueAdder}) => {
+    const blurClasses = ["", " blurred", " unblurred"];
+    const isBlurred = blurClasses[showQueueAdder];
 
     let [queueList, isFetching] = useFetch('http://localhost:8000/queue');
 
     return (
-        <div className="main-content">
+        <div className={"main-content" + isBlurred}>
             <p>Ваши очереди:</p>
             {!isFetching && queueList && <div className="queue-list">{
                 queueList.map(queue => {
